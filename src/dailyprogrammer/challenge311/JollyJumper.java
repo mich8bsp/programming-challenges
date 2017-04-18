@@ -3,10 +3,12 @@ package dailyprogrammer.challenge311;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 /**
@@ -16,10 +18,15 @@ public class JollyJumper {
 
     public static void main(String[] args) throws IOException, URISyntaxException {
         JollyJumper jumper = new JollyJumper();
-        Files.readAllLines(Paths.get(JollyJumper.class.getResource(".\\input.txt").toURI())).stream()
-                .map(jumper::isJolly)
-                .map(isJolly -> isJolly ? "JOLLY" : "NOT JOLLY")
-                .forEachOrdered(System.out::println);
+        Path inputFilePath = Paths.get(JollyJumper.class.getResource(".\\input.txt").toURI());
+        String output = Files.readAllLines(inputFilePath).stream()
+                .map(line -> line + (jumper.isJolly(line) ? " JOLLY" : " NOT JOLLY"))
+                .collect(Collectors.joining(System.getProperty("line.separator")));
+        Path expectedOutputFilePath = Paths.get(JollyJumper.class.getResource(".\\output.txt").toURI());
+        String expectedOutput = new String(Files.readAllBytes(expectedOutputFilePath));
+
+        System.out.println( (output.equals(expectedOutput)) ? "SUCCESS" : "FAILURE");
+
     }
 
     private boolean isJolly(String line) {
