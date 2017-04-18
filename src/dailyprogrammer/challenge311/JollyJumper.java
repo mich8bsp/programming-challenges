@@ -18,11 +18,11 @@ public class JollyJumper {
 
     public static void main(String[] args) throws IOException, URISyntaxException {
         JollyJumper jumper = new JollyJumper();
-        Path inputFilePath = Paths.get(JollyJumper.class.getResource(".\\input.txt").toURI());
+        Path inputFilePath = Paths.get(JollyJumper.class.getResource("input.txt").toURI());
         String output = Files.readAllLines(inputFilePath).stream()
                 .map(line -> line + (jumper.isJolly(line) ? " JOLLY" : " NOT JOLLY"))
                 .collect(Collectors.joining(System.getProperty("line.separator")));
-        Path expectedOutputFilePath = Paths.get(JollyJumper.class.getResource(".\\output.txt").toURI());
+        Path expectedOutputFilePath = Paths.get(JollyJumper.class.getResource("output.txt").toURI());
         String expectedOutput = new String(Files.readAllBytes(expectedOutputFilePath));
 
         System.out.println( (output.equals(expectedOutput)) ? "SUCCESS" : "FAILURE");
