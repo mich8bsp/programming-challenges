@@ -1,4 +1,4 @@
-package dailyprogrammer.challenge311;
+package dailyprogrammer.challenge311.easy;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
